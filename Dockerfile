@@ -10,6 +10,6 @@ WORKDIR $REPO
 RUN npm install && npm run build && make build
 ENV PATH="${REPO}:${PATH}"
 
-COPY push.sh ./
+COPY . ./
 RUN ["chmod", "+x", "push.sh"]
 ENTRYPOINT [ "./push.sh" ]
