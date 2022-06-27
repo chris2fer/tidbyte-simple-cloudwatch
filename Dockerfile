@@ -10,5 +10,5 @@ WORKDIR $REPO
 RUN npm install && npm run build && make build
 ENV PATH="${REPO}:${PATH}"
 
-EXPOSE 8080
-ENTRYPOINT [ "pixlet", "version" ]
+COPY push.sh ./
+ENTRYPOINT [ "./push.sh" ]

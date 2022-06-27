@@ -1,21 +1,25 @@
 
-
-
 load("render.star", "render")
+load("time.star", "time")
 
 def main(config):
-    font = config.get("font", "tb-8")
-    print("Using font: '{}'".format(font))
-    name = config.get("name", "Unknown")
-    print("Name is: '{}'".format(name))
+    timezone = config.get("timezone") or "America/New_York"
+    now = time.now().in_location(timezone)
+
     return render.Root(
-        # delay = 10,
-        child = render.Column(
-            children = [
-                render.Marquee(
-                    width = 64,
-                    child = render.Text("My name is {}".format(name), font = font),
-                )
-            ],
+        delay = 500,
+        child = render.Box(
+            child = render.Animation(
+                children = [
+                    render.Text(
+                        content = now.format("3:04 PM"),
+                        font = "6x13",
+                    ),
+                    render.Text(
+                        content = now.format("3 04 PM"),
+                        font = "6x13",
+                    ),
+                ],
+            ),
         ),
     )
